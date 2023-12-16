@@ -57,7 +57,7 @@ class LikePage extends StatelessWidget {
                   );
                 },
               )
-            : const Center(child: Text("KHÔNG  CÓ SẢN PHẨM NÀO !!!")),
+            : const Center(child: Text("KHÔNG CÓ SẢN PHẨM NÀO CẢ !!!")),
       ),
     );
   }
