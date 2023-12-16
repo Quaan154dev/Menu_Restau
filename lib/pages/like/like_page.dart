@@ -19,8 +19,21 @@ class LikePage extends StatelessWidget {
     List<Article> data =
         dataMockup.where((element) => idListLike.contains(element.id)).toList();
 
+    List<Article> dataremove =
+        data.where((element) => data.contains(element.id)).toList();
+
     print("idListLike :${data}");
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {
+                context.read<LikeProvider>().deleteAll();
+              },
+              icon: const Icon(Icons.remove_circle_outline)),
+          const SizedBox(width: 20),
+        ],
+      ),
       body: SafeArea(
         child: data.isNotEmpty
             ? ListView.separated(
@@ -47,10 +60,25 @@ class LikePage extends StatelessWidget {
                           color: Colors.amber,
                           borderRadius: BorderRadius.circular(10.0),
                         ),
-                        child: FadeInImage.memoryNetwork(
-                          placeholder: kTransparentImage,
-                          fit: BoxFit.cover,
-                          image: data[index].image,
+                        child: Stack(
+                          children: [
+                            IconButton(
+                                onPressed: () {
+                                  context
+                                      .read<LikeProvider>()
+                                      .deleteItem(dataremove[index].id);
+                                },
+                                icon: const Icon(Icons.delete)),
+                            Container(
+                              width: double.infinity,
+                              // height: double.infinity,
+                              child: FadeInImage.memoryNetwork(
+                                placeholder: kTransparentImage,
+                                fit: BoxFit.cover,
+                                image: data[index].image,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),

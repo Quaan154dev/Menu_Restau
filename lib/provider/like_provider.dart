@@ -14,4 +14,14 @@ class LikeProvider extends ChangeNotifier {
     print(listLike);
     notifyListeners();
   }
+
+  void deleteItem(int id) {
+    listLike.remove(id);
+    notifyListeners();
+  }
+
+  void deleteAll() {
+    listLike = [];
+    notifyListeners();
+  }
 }
